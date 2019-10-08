@@ -8,11 +8,13 @@ import UIKit
 
 let numbers = [1,1,2,4,4,4,6,6,7,8]
 
-var numbersWithNoDuplicates = [Int]()
+//var numbersWithNoDuplicates = [Int]()
 
 // Your code here
 
-//assert(numbersWithNoDuplicates == [1,2,4,6,7,8], "Was expecting [1,2,4,6,7,8], but got \(numbersWithNoDuplicates)")
+var numbersWithNoDuplicates = Array(Set(numbers).sorted())
+
+assert(numbersWithNoDuplicates == [1,2,4,6,7,8], "Was expecting [1,2,4,6,7,8], but got \(numbersWithNoDuplicates)")
 
 // Questions Two
 
@@ -24,7 +26,23 @@ var scoresThatAppearOnce = [Int]()
 
 // Your code here
 
-//assert(scoresThatAppearOnce == [1, 99], "Was expecting [1, 99], but got \(scoresThatAppearOnce)")
+var visitedNum: [Int] = []
+var scoresThatAppearOnce: [Int] = []
+
+for num in scores {
+   if !visitedNum.contains(num) {
+       scoresThatAppearOnce.append(num)
+       visitedNum.append(num)
+   } else {
+       if let index = scoresThatAppearOnce.firstIndex(of: num) {
+           scoresThatAppearOnce.remove(at: index)
+       }
+   }
+}
+print(scoresThatAppearOnce)
+
+
+assert(scoresThatAppearOnce == [1, 99], "Was expecting [1, 99], but got \(scoresThatAppearOnce)")
 
 // Question Three
 
@@ -36,10 +54,11 @@ let arrOne = [1,2,3,4,5]
 let arrTwo = [3,4,5,6,7]
 
 var arrThree: [Int] = []
+var oneSet: Set<Int> = Set(arrOne)
+var twoSet: Set<Int> = Set(arrTwo)
+arrThree = Array(oneSet.union(twoSet)).sorted()
 
-// Your code here
-
-//assert(arrThree == [1,2,3,4,5,6,7], "Was expecting [1,2,3,4,5,6,7], but got \(arrThree)")
+assert(arrThree == [1,2,3,4,5,6,7], "Was expecting [1,2,3,4,5,6,7], but got \(arrThree)")
 
 // b.
 
@@ -49,6 +68,10 @@ let arrFour = [1,2,3,4,5]
 let arrFive = [3,4,5,6,7]
 
 var arrSix: [Int] = []
+var fourSet: Set<Int> = Set(arrFour)
+var fiveSet: Set<Int> = Set(arrFive)
+
+arrSix = Array(fourSet.intersection(arrFive)).sorted()
 
 // Your code here
 
@@ -63,9 +86,7 @@ let numsTwo = [1, 2, 3, 4, 5, 6]
 let numsThree = [5, 6, 7, 8, 9, 10, 11, 12]
 let numsFour = [1, 3, 4, 5, 6, 7, 9]
 
-var allNumsWithNoDuplicates: [Int] = []
-
-// Your code here
+var allNumsWithNoDuplicates = Array(Set(numsOne + numsTwo + numsThree + numsFour).sorted())
 
 //assert(allNumsWithNoDuplicates == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "Was expecting [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], but got \([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])")
 
